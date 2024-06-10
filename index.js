@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 5000
 const bodyParser = require('body-parser');
+
+const config = require('./config/key');
 const { User } = require("./models/User");
 
 // application/x-www-form-urlencoded
@@ -10,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 // applocation/json
 app.use(bodyParser.json());
 const mongoose = require('mongoose')
- mongoose.connect('mongodb+srv://shia:rnjsgydms84!@cluster0.ytazsaa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',{
+ mongoose.connect(config.mongoURI,{
     // useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
     // mongoose 6버전 이상에선 더이상 useNewUrlParser, useUnifiedTopology, useFindAndModify, useCreateIndex 요 친구들을 지원하지 않기 때문에 지워주면 된다
 }).then(() => console.log('MongoDB Connected...'))
